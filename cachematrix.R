@@ -1,4 +1,4 @@
-## System of 2 functions for cashing matrix computations
+## System of 2 functions for calculate matrix inversion and cache computations
 
 ## Function for cashing computations and set list of functions
 
