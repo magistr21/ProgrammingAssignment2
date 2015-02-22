@@ -1,16 +1,44 @@
-## Put comments here that give an overall description of what your
-## functions do
+## System of 2 functions for cashing matrix computations
 
-## Write a short comment describing this function
-## First Version
+## Function for cashing computations and set list of functions
 
-makeCacheMatrix <- function(x = matrix()) {
+makeCacheMatrix <- function(x = data.frame()) {
+  inverse <- NULL
 
+#set functions
+
+  set <- function(y) {
+    x <<- y
+    inverse <<- NULL
+  }
+
+  get <- function() x
+  setinverse <- function(solve) inverse <<- solve
+  getinverse <- function() inverse
+  list(set = set, get = get,
+       setinverse = setinverse,
+       getinverse = getinverse)
 }
 
 
-## Write a short comment describing this function
+## Function for calculating matrix inverse or recieve cashed inverse
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+  inverse <- x$getinverse()
+
+##if inverse already calculated then use cache
+
+  if(!is.null(inverse)) {
+    message("getting cached data")
+    return(inverse)
+  }
+
+##else calculate inverse
+
+  data <- x$get()
+  inverse <- solve(data, ...)
+  x$setinverse(inverse)
+  return(inverse)
 }
+
+
